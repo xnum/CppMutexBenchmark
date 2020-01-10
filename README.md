@@ -44,12 +44,6 @@ BM_BoostSharedMutexReadOnlyWithStdVector/3/real_time       1251 ns         1250 
 BM_BoostSharedMutexReadOnlyWithStdVector/4/real_time       1414 ns         1412 ns       500023
 BM_BoostSharedMutexReadOnlyWithStdVector/5/real_time       1575 ns         1546 ns       469274
 BM_BoostSharedMutexReadOnlyWithStdVector/6/real_time       1733 ns         1728 ns       427882
-BM_BoostSharedMutexReadOnlyWithStdVector/1/real_time        945 ns          945 ns       722967
-BM_BoostSharedMutexReadOnlyWithStdVector/2/real_time       1115 ns         1114 ns       630878
-BM_BoostSharedMutexReadOnlyWithStdVector/3/real_time       1251 ns         1250 ns       556841
-BM_BoostSharedMutexReadOnlyWithStdVector/4/real_time       1414 ns         1412 ns       500023
-BM_BoostSharedMutexReadOnlyWithStdVector/5/real_time       1575 ns         1546 ns       469274
-BM_BoostSharedMutexReadOnlyWithStdVector/6/real_time       1733 ns         1728 ns       427882
 BM_BoostSharedMutexWithStdVector/1/real_time               1308 ns         1308 ns       527286
 BM_BoostSharedMutexWithStdVector/2/real_time               1865 ns         1864 ns       372503
 BM_BoostSharedMutexWithStdVector/3/real_time               4051 ns         3972 ns       162851
@@ -81,6 +75,28 @@ BM_StdMutexWithStdVector/4/real_time                       1105 ns         1104 
 BM_StdMutexWithStdVector/5/real_time                       1202 ns         1202 ns       512034
 BM_StdMutexWithStdVector/6/real_time                       1380 ns         1377 ns       523132
 ```
+
+3R 1W
+
+| concurrency | std::mutex | std::shared_mutex | boost::shared_mutex | tbb::queuing_rw_mutex | tbb::concurrent_vector |
+| ----------- | ---------- | ----------------- | ------------------- | --------------------- | ---------------------- |
+|      1      |     789    |        802        |        1308         |          834          |        60742           |
+|      2      |     882    |        930        |        1864         |         1064          |        34495           |
+|      3      |     984    |       1065        |        3972         |         1266          |        34523           |
+|      4      |    1104    |       1076        |        6656         |         1325          |        27940           |
+|      5      |    1202    |       1237        |        9127         |         1755          |        27325           |
+|      6      |    1377    |       1351        |        9742         |         1848          |        29876           |
+
+4R
+
+| concurrency | std::shared_mutex | boost::shared_mutex | tbb::queuing_rw_mutex | boost::shared_mutex (upgrade_lock) |
+| ----------- | ----------------- | ------------------- | --------------------- | ---------------------------------- |
+|      1      |        450        |         945         |          497          |              967                   |
+|      2      |        551        |        1114         |          562          |             1206                   |
+|      3      |        589        |        1250         |          694          |             2148                   |
+|      4      |        620        |        1412         |          754          |             3267                   |
+|      5      |        703        |        1546         |          766          |             4064                   |
+|      6      |        723        |        1728         |          842          |             4818                   |
 
 # Conclusion
 
