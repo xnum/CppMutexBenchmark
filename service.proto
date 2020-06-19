@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+package order;
+
+service Order {
+  rpc PlaceOrder(OrderMessage) returns (google.protobuf.Empty) {}
+}
+
+message OrderMessage {
+  string account = 1;
+  string exchange = 2;
+  string symbol = 3;
+}
+
+

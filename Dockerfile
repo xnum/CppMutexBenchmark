@@ -8,11 +8,13 @@ RUN apk update && \
             git \
             g++ \
             linux-headers \
-            make
+            make \
+            protobuf-dev
+
 
 RUN git clone https://github.com/ffontaine/tbb.git --depth 1 && cd tbb && \
     make -j4 && cp -r include /usr/local && \
-    cp -r build/linux_intel64_gcc_cc9.2.0_libc_kernel5.0.0_release/*.so.2 /usr/local/lib && \
+    cp -r build/linux_intel64_gcc_cc9.2.0_libc_kernel5.3.0_release/*.so.2 /usr/local/lib && \
     cd .. && rm -rf tbb && \
     cd /usr/local/lib/ && \
     ln -s libtbb.so.2 libtbb.so && \
@@ -28,4 +30,4 @@ RUN git clone https://github.com/google/benchmark.git --depth 1 && \
 COPY . /src
 
 WORKDIR /src
-CMD sh ./run.sh
+CMD sh
