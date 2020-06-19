@@ -13,7 +13,7 @@ static void BM_PassObject(benchmark::State &state)
   }
 }
 
-static void BM_PassRValueRef(benchmark::State &state)
+static void BM_PassLValueRef(benchmark::State &state)
 {
   auto fn = [](const string &s) { s.find('a'); };
 
@@ -24,6 +24,6 @@ static void BM_PassRValueRef(benchmark::State &state)
 }
 
 BENCHMARK(BM_PassObject);
-BENCHMARK(BM_PassRValueRef);
+BENCHMARK(BM_PassLValueRef);
 
 BENCHMARK_MAIN();
